@@ -57,8 +57,8 @@ public class Bombecrypter {
 		// Initialize frame
 		
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Bombecrypter.class.getResource("/com/richardyang/res/icon.png")));
-		frame.setTitle("Bombecrypter - © 2017 Richard Yang");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Bombecrypter.class.getResource("/net/premiumrich/res/icon.png")));
+		frame.setTitle("Bombecrypter");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 500, 275);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
