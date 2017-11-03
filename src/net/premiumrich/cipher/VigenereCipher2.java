@@ -1,4 +1,4 @@
-package com.premiumrich.cipher;
+package net.premiumrich.cipher;
 
 // (C) 2017 Richard Yang
 

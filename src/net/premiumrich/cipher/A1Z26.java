@@ -1,4 +1,4 @@
-package com.premiumrich.cipher;
+package net.premiumrich.cipher;
 
 public class A1Z26 {
 	

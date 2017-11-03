@@ -1,6 +1,6 @@
-package com.premiumrich.main;
+package net.premiumrich.main;
 
-import com.premiumrich.cipher.*;
+import net.premiumrich.cipher.*;
 
 public class EncryptionHandling {
 	

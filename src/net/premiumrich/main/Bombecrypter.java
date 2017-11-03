@@ -1,4 +1,4 @@
-package com.premiumrich.main;
+package net.premiumrich.main;
 
 import java.awt.EventQueue;
 
