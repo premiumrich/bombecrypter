@@ -21,6 +21,9 @@ import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
+
+import net.premiumrich.exceptions.*;
+
 import javax.swing.event.ChangeEvent;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
@@ -57,7 +60,7 @@ public class Bombecrypter {
 		// Initialize frame
 		
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Bombecrypter.class.getResource("/net/premiumrich/res/icon.png")));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Bombecrypter.class.getResource("/net/richardyang/res/icon.png")));
 		frame.setTitle("Bombecrypter");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 500, 275);
@@ -307,23 +310,23 @@ public class Bombecrypter {
 				EncryptionHandling eh = new EncryptionHandling();
 				String output = "";
 				
-				if (inputText.getText().equals("")) {
-					statusBar.setForeground(Color.RED);
-					statusBar.setText("Error! No input. Please try again.");
-				} else {
+				try {
 					output = eh.handle("encrypt", comboBox.getSelectedIndex(), ccShiftValueSlider.getValue(), VCKey.getText(), inputText.getText());
-				}
-				
-				if (output.equals("errEncOnDefault!")) {
-					statusBar.setForeground(Color.RED);
-					statusBar.setText("Error! No cipher selected. Please try again.");
-				} else if (output.equals("errNull!")) {
-					statusBar.setForeground(Color.RED);
-					statusBar.setText("Error in code! Please inform the programmer. Thank you.");
-				} else {
 					outputText.setText(output);
 					statusBar.setForeground(Color.BLACK);
 					statusBar.setText("Successfully encrypted the text.");
+				} catch (InvalidCipherException ex) {
+					System.out.println("Exception occured: " + ex);
+					statusBar.setForeground(Color.RED);
+					statusBar.setText(ex.getMessage());
+				} catch (NoInputException ex) {
+					System.out.println("Exception occured: " + ex);
+					statusBar.setForeground(Color.RED);
+					statusBar.setText(ex.getMessage());
+				} catch (ProgrammingException ex) {
+					System.out.println("Exception occured: " + ex);
+					statusBar.setForeground(Color.RED);
+					statusBar.setText(ex.getMessage());
 				}
 			}
 		});
@@ -335,28 +338,30 @@ public class Bombecrypter {
 				EncryptionHandling eh = new EncryptionHandling();
 				String output = "";
 				
-				if (inputText.getText().equals("")) {
-					statusBar.setForeground(Color.RED);
-					statusBar.setText("Error! No input. Please try again.");
-				} else {
+				try {
 					output = eh.handle("decrypt", comboBox.getSelectedIndex(), ccShiftValueSlider.getValue(), VCKey.getText(), inputText.getText());
-				}
-				
-				if (output.equals("errEncOnDefault!")) {
-					statusBar.setForeground(Color.RED);
-					statusBar.setText("Error! No cipher selected. Please try again.");
-				} else if (output.equals("errNull!")) {
-					statusBar.setForeground(Color.RED);
-					statusBar.setText("Error in code! Please inform the programmer. Thank you.");
-				} else {
 					outputText.setText(output);
 					statusBar.setForeground(Color.BLACK);
 					statusBar.setText("Successfully decrypted the text.");
+				} catch (InvalidCipherException ex) {
+					System.out.println("Exception occured: " + ex);
+					statusBar.setForeground(Color.RED);
+					statusBar.setText(ex.getMessage());
+				} catch (NoInputException ex) {
+					System.out.println("Exception occured: " + ex);
+					statusBar.setForeground(Color.RED);
+					statusBar.setText(ex.getMessage());
+				} catch (ProgrammingException ex) {
+					System.out.println("Exception occured: " + ex);
+					statusBar.setForeground(Color.RED);
+					statusBar.setText(ex.getMessage());
 				}
+	
 			}
 		});
 		
 		//======================================================================================================================
 		
 	}
+	
 }
