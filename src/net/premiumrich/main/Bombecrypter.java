@@ -60,7 +60,7 @@ public class Bombecrypter {
 		// Initialize frame
 		
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Bombecrypter.class.getResource("/net/richardyang/res/icon.png")));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Bombecrypter.class.getResource("/net/premiumrich/res/icon.png")));
 		frame.setTitle("Bombecrypter");
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 500, 275);
@@ -73,7 +73,7 @@ public class Bombecrypter {
 		//======================================================================================================================
 		// Create combobox at the top
 		
-		String ciphers[] = {"Please select a cipher:", "Caesar cipher", "Vigenere cipher", "A1Z26 cipher"};
+		String ciphers[] = {"Please select a cipher:", "Caesar cipher", "Vigenère cipher", "A1Z26 cipher"};
 		JComboBox<String> comboBox = new JComboBox<>();
 		comboBox.setModel(new DefaultComboBoxModel<String>(ciphers));
 		comboBox.setSelectedIndex(0);
@@ -278,7 +278,7 @@ public class Bombecrypter {
 					break;
 				case 1:
 					cards.show(settingsCards, "CCPanel");
-					statusBar.setText("Ceasar cipher selected. Please use the slider to set the encryption shift.");
+					statusBar.setText("Caesar cipher selected. Please use the slider to set the encryption shift.");
 					break;
 				case 2:
 					cards.show(settingsCards, "VCPanel");
