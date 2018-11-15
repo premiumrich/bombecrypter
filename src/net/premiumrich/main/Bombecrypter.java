@@ -1,96 +1,47 @@
 package net.premiumrich.main;
 
-import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
 
-import javax.swing.JFrame;
-import java.awt.CardLayout;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.Color;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.*;
 
 import net.premiumrich.exceptions.*;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.JTextField;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JTextArea;
-import java.awt.Toolkit;
-
 public class Bombecrypter {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField VCKey;
 	private JTextField statusBar;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Bombecrypter window = new Bombecrypter();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public Bombecrypter() {
 		initialize();
 	}
 
 	private void initialize() {
-		
-		//======================================================================================================================
 		// Initialize frame
-		
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Bombecrypter.class.getResource("/net/premiumrich/res/icon.png")));
+		ImageIcon appIcon = new ImageIcon("net/premiumrich/res/icon.png");
+		frame.setIconImage(appIcon.getImage());
 		frame.setTitle("Bombecrypter");
-		frame.setResizable(false);
 		frame.setBounds(100, 100, 500, 275);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//======================================================================================================================
-		
-		
-		
-		//======================================================================================================================
-		// Create combobox at the top
-		
+		// Create combobox at the top and its frame
 		String ciphers[] = {"Please select a cipher:", "Caesar cipher", "Vigenère cipher", "A1Z26 cipher"};
 		JComboBox<String> comboBox = new JComboBox<>();
 		comboBox.setModel(new DefaultComboBoxModel<String>(ciphers));
 		comboBox.setSelectedIndex(0);
 
-		//======================================================================================================================
-		
-		
-		
-		//======================================================================================================================
-		// Create content panels
-		
 		JPanel cipherSelector = new JPanel();
 		cipherSelector.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		cipherSelector.setLayout(new BorderLayout(0, 0));
 		frame.getContentPane().add(cipherSelector, BorderLayout.NORTH);
 		cipherSelector.add(comboBox);
-		
+
+		// Create content panels
 		JPanel mainContentPanel = new JPanel();
 		frame.getContentPane().add(mainContentPanel, BorderLayout.CENTER);
 		mainContentPanel.setLayout(new BorderLayout(0, 0));
@@ -259,13 +210,7 @@ public class Bombecrypter {
 						statusBar.setColumns(10);
 						statusBar.setText("");
 					
-		//======================================================================================================================
-				
-				
-				
-		//======================================================================================================================
 		// Listeners - heart of the program
-		
 		// Interactively change the settings card specific for each cipher
 		CardLayout cards = (CardLayout)settingsCards.getLayout();
 		comboBox.addActionListener(new ActionListener() {
@@ -307,14 +252,12 @@ public class Bombecrypter {
 		btnEncrypt.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EncryptionHandling eh = new EncryptionHandling();
-				String output = "";
-				
+				EncryptionHandler eh = new EncryptionHandler();
 				try {
-					output = eh.handle("encrypt", comboBox.getSelectedIndex(), ccShiftValueSlider.getValue(), VCKey.getText(), inputText.getText());
+					String output = eh.handle("encrypt", comboBox.getSelectedIndex(), ccShiftValueSlider.getValue(), VCKey.getText(), inputText.getText());
 					outputText.setText(output);
 					statusBar.setForeground(Color.BLACK);
-					statusBar.setText("Successfully encrypted the text.");
+					statusBar.setText("Encryption successful.");
 				} catch (InvalidCipherException ex) {
 					System.out.println("Exception occured: " + ex);
 					statusBar.setForeground(Color.RED);
@@ -335,14 +278,12 @@ public class Bombecrypter {
 		btnDecrypt.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EncryptionHandling eh = new EncryptionHandling();
-				String output = "";
-				
+				EncryptionHandler eh = new EncryptionHandler();
 				try {
-					output = eh.handle("decrypt", comboBox.getSelectedIndex(), ccShiftValueSlider.getValue(), VCKey.getText(), inputText.getText());
+					String output = eh.handle("decrypt", comboBox.getSelectedIndex(), ccShiftValueSlider.getValue(), VCKey.getText(), inputText.getText());
 					outputText.setText(output);
 					statusBar.setForeground(Color.BLACK);
-					statusBar.setText("Successfully decrypted the text.");
+					statusBar.setText("Decryption successful.");
 				} catch (InvalidCipherException ex) {
 					System.out.println("Exception occured: " + ex);
 					statusBar.setForeground(Color.RED);
@@ -359,9 +300,6 @@ public class Bombecrypter {
 	
 			}
 		});
-		
-		//======================================================================================================================
-		
 	}
 	
 }
